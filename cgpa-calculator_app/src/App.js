@@ -22,9 +22,8 @@ function App() {
     setCgpaScale(event.target.value);
   };
 
-  const totalCreditHours = courses.reduce((acc, course) => acc + course.creditHours, 0);
-  const totalGrades = courses.reduce((acc, course) => acc + (course.grade * course.creditHours), 0);
-  const cgpa = totalCreditHours > 0 ? totalGrades / totalCreditHours : 0;
+  const grades = courses.map(course => course.grade);
+  const creditHours = courses.map(course => course.creditHours);
 
   return (
     <div className="app">
@@ -35,8 +34,8 @@ function App() {
         handleCgpaScaleChange={handleCgpaScaleChange}
       />
       <Table courses={courses} removeCourse={removeCourse} />
-      <Calculator cgpa={cgpa} cgpaScale={cgpaScale} />
-      <Export courses={courses} cgpa={cgpa} cgpaScale={cgpaScale} />
+      <Calculator grades={grades} creditHours={creditHours} />
+      <Export courses={courses} cgpaScale={cgpaScale} />
     </div>
   );
 }

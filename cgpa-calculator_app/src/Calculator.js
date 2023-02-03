@@ -30,13 +30,15 @@ const calculateCGPA = (grades, creditHours) => {
     totalCreditHours += creditHours[index];
   });
 
-  return totalPoints / totalCreditHours;
+  return totalCreditHours > 0 ? totalPoints / totalCreditHours : 0;
 };
 
-const Calculator = ({ courses, grades, creditHours }) => {
+const Calculator = ({ courses }) => {
   const [cgpa, setCGPA] = useState(0);
 
   const handleCalculate = () => {
+    const grades = courses.map(course => course.grade);
+    const creditHours = courses.map(course => course.creditHours);
     const calculatedCGPA = calculateCGPA(grades, creditHours);
     setCGPA(calculatedCGPA);
   };

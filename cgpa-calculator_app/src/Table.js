@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Table = ({ courses, grades, creditHours, cgpa }) => {
+const Table = ({ courses, removeCourse }) => {
   return (
     <table>
       <thead>
@@ -8,22 +8,23 @@ const Table = ({ courses, grades, creditHours, cgpa }) => {
           <th>Course</th>
           <th>Grade</th>
           <th>Credit Hour</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         {courses.map((course, index) => (
           <tr key={index}>
-            <td>{course}</td>
-            <td>{grades[index]}</td>
-            <td>{creditHours[index]}</td>
+            <td>{course.course}</td>
+            <td>{course.grade}</td>
+            <td>{course.creditHours}</td>
+            <td>
+              <button type="button" onClick={() => removeCourse(index)}>
+                Remove
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>
-      <tfoot>
-        <tr>
-          <td colSpan={3}>CGPA: {cgpa}</td>
-        </tr>
-      </tfoot>
     </table>
   );
 };
