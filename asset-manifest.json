@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/CGPA-CALCULATOR/static/css/main.92eb2e98.css",
+    "main.js": "/CGPA-CALCULATOR/static/js/main.2f6c1c5e.js",
+    "index.html": "/CGPA-CALCULATOR/index.html",
+    "main.92eb2e98.css.map": "/CGPA-CALCULATOR/static/css/main.92eb2e98.css.map",
+    "main.2f6c1c5e.js.map": "/CGPA-CALCULATOR/static/js/main.2f6c1c5e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92eb2e98.css",
+    "static/js/main.2f6c1c5e.js"
+  ]
+}
