@@ -1,36 +1,27 @@
-import React from "react";
+import React from 'react';
 
-const Table = ({ courses, cgpa, scale }) => {
-  const grades = ["A", "B", "C", "D", "E", "F"];
-  const weights = {};
-  grades.forEach((grade, index) => {
-    weights[grade] = scale === 5.0 ? 5 - index : 4 - index;
-  });
-
-  const rows = courses.map((course, index) => (
-    <tr key={index}>
-      <td>{index + 1}</td>
-      <td>{course.grade}</td>
-      <td>{course.hours}</td>
-      <td>{course.hours * weights[course.grade]}</td>
-    </tr>
-  ));
-
+const Table = ({ courses, grades, creditHours, cgpa }) => {
   return (
     <table>
       <thead>
         <tr>
           <th>Course</th>
           <th>Grade</th>
-          <th>Credit Hours</th>
-          <th>Weight</th>
+          <th>Credit Hour</th>
         </tr>
       </thead>
-      <tbody>{rows}</tbody>
+      <tbody>
+        {courses.map((course, index) => (
+          <tr key={index}>
+            <td>{course}</td>
+            <td>{grades[index]}</td>
+            <td>{creditHours[index]}</td>
+          </tr>
+        ))}
+      </tbody>
       <tfoot>
         <tr>
-          <td colSpan="3">CGPA</td>
-          <td>{cgpa}</td>
+          <td colSpan={3}>CGPA: {cgpa}</td>
         </tr>
       </tfoot>
     </table>

@@ -1,89 +1,57 @@
 import React, { useState } from 'react';
 
-const Form = () => {
-const [cgpaScale, setCGPAScale] = useState(5.0);
-const [noOfCourses, setNoOfCourses] = useState(0);
-const [grades, setGrades] = useState([]);
-const [creditHours, setCreditHours] = useState([]);
-const [cgpa, setCGPA] = useState(0);
+const Form = ({ onSubmit }) => {
+  const [course, setCourse] = useState('');
+  const [grade, setGrade] = useState('');
+  const [creditHour, setCreditHour] = useState(0);
 
-const handleNoOfCoursesChange = (e) => {
-setNoOfCourses(e.target.value);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(course, grade, creditHour);
+    setCourse('');
+    setGrade('');
+    setCreditHour(0);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="course">Course:</label>
+        <input
+          type="text"
+          id="course"
+          value={course}
+          onChange={(event) => setCourse(event.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="grade">Grade:</label>
+        <select
+          id="grade"
+          value={grade}
+          onChange={(event) => setGrade(event.target.value)}
+        >
+          <option value="">Select a grade</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="credit-hour">Credit Hour:</label>
+        <input
+          type="number"
+          id="credit-hour"
+          value={creditHour}
+          onChange={(event) => setCreditHour(event.target.value)}
+        />
+      </div>
+      <button type="submit">Add Course</button>
+    </form>
+  );
 };
 
-const handleGradesChange = (e, index) => {
-const updatedGrades = [...grades];
-updatedGrades[index] = e.target.value;
-setGrades(updatedGrades);
-};
-
-const handleCreditHoursChange = (e, index) => {
-const updatedCreditHours = [...creditHours];
-updatedCreditHours[index] = e.target.value;
-setCreditHours(updatedCreditHours);
-};
-
-const calculateCGPA = () => {
-let totalGradePoints = 0;
-let totalCreditHours = 0;
-
-grades.forEach((grade, index) => {
-    let gradePoints;
-    switch (grade) {
-      case 'A':
-        gradePoints = cgpaScale;
-        break;
-      case 'B':
-        gradePoints = cgpaScale - 1;
-        break;
-      case 'C':
-        gradePoints = cgpaScale - 2;
-        break;
-      case 'D':
-        gradePoints = cgpaScale - 3;
-        break;
-      case 'E':
-        gradePoints = cgpaScale - 4;
-        break;
-      default:
-        gradePoints = 0;
-    }
-    totalGradePoints += gradePoints * creditHours[index];
-    totalCreditHours += creditHours[index];
-  });
-  
-  setCGPA(totalGradePoints / totalCreditHours);
-};
-
-const handleSubmit = (e) => {
-e.preventDefault();
-calculateCGPA();
-};
-
-const formInputs = [];
-for (let i = 0; i < noOfCourses; i++) {
-formInputs.push(
-<div key={i}>
-<label htmlFor={grade-${i}}>Grade for course {i + 1}:</label>
-<input
-type="text"
-id={grade-${i}}
-value={grades[i] || ''}
-onChange={(e) => handleGradesChange(e, i)}
-/>
-<label htmlFor={credit-hours-${i}}>
-Credit hours for course {i + 1}:
-</label>
-<input
-type="number"
-id={credit-hours-${i}}
-value={creditHours[i] || 0}
-onChange={(e) => handleCreditHoursChange(e, i)}
-/>
-</div>
-);
-}
-
-return (
-<form onSubmit={handleSubmit}>
-<label htmlFor="cgpa-scale">CGPA Scale:</label>  
+export default Form;
