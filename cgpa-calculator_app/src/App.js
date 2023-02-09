@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Form from './Form';
-import Table from './Table';
-import Calculator from './Calculator';
-import Export from './Export';
-import './styles.css';
-import './app.css';
+import React, { useState } from "react";
+import Form from "./Form";
+import Table from "./Table";
+import Calculator from "./Calculator";
+import Export from "./Export";
+import "./styles.css";
+import "./app.css";
 
 function App() {
   const [courses, setCourses] = useState([]);
@@ -22,8 +22,8 @@ function App() {
     setCgpaScale(event.target.value);
   };
 
-  const grades = courses.map(course => course.grade);
-  const creditHours = courses.map(course => course.creditHours);
+  const grades = courses.map((course) => course.grade);
+  const creditHours = courses.map((course) => course.creditHours);
 
   return (
     <div className="app">
@@ -34,7 +34,7 @@ function App() {
         handleCgpaScaleChange={handleCgpaScaleChange}
       />
       <Table courses={courses} removeCourse={removeCourse} />
-      <Calculator grades={grades} creditHours={creditHours} />
+      <Calculator courses={courses} grades={grades} creditHours={creditHours} />
       <Export courses={courses} cgpaScale={cgpaScale} />
     </div>
   );

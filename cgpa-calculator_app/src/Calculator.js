@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const calculateCGPA = (grades, creditHours) => {
   let totalPoints = 0;
@@ -6,22 +6,22 @@ const calculateCGPA = (grades, creditHours) => {
 
   grades.forEach((grade, index) => {
     switch (grade) {
-      case 'A':
+      case "A":
         totalPoints += 5 * creditHours[index];
         break;
-      case 'B':
+      case "B":
         totalPoints += 4 * creditHours[index];
         break;
-      case 'C':
+      case "C":
         totalPoints += 3 * creditHours[index];
         break;
-      case 'D':
+      case "D":
         totalPoints += 2 * creditHours[index];
         break;
-      case 'E':
+      case "E":
         totalPoints += 1 * creditHours[index];
         break;
-      case 'F':
+      case "F":
         totalPoints += 0 * creditHours[index];
         break;
       default:
@@ -37,15 +37,16 @@ const Calculator = ({ courses }) => {
   const [cgpa, setCGPA] = useState(0);
 
   const handleCalculate = () => {
-    const grades = courses.map(course => course.grade);
-    const creditHours = courses.map(course => course.creditHours);
+    console.log(courses);
+    const grades = courses.map((course) => course.grade);
+    const creditHours = courses.map((course) => course.creditHours);
     const calculatedCGPA = calculateCGPA(grades, creditHours);
     setCGPA(calculatedCGPA);
   };
 
   return (
     <div>
-      <button onClick={handleCalculate}>Calculate CGPA</button>
+      <button onClick={() => handleCalculate()}>Calculate CGPA</button>
       <p>CGPA: {cgpa}</p>
     </div>
   );
