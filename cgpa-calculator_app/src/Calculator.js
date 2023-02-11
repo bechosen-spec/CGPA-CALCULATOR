@@ -37,6 +37,8 @@ const Calculator = ({ courses }) => {
   const [cgpa, setCGPA] = useState(0);
 
   const handleCalculate = () => {
+    if (!courses || courses.length === 0) return;
+
     const grades = courses.map(course => course.grade);
     const creditHours = courses.map(course => course.creditHours);
     const calculatedCGPA = calculateCGPA(grades, creditHours);
